@@ -1,12 +1,8 @@
-public class PhoneStorage {
+class PhoneStorage {
     private class Node{
         private int value;
         private Node prev;
         private Node[] nodes=new Node[10];
-
-        Node(){
-            this.prev=null;
-        }
 
         Node(int value){
             this.value=value;
@@ -20,14 +16,6 @@ public class PhoneStorage {
 
         Node[] getNodes(){
             return nodes;
-        }
-
-        void setNodes(int index, Node node){
-            nodes[index]=node;
-        }
-
-        void deleteNode(int index){
-            nodes[index]=null;
         }
 
         void setPrev(Node prev){
@@ -108,10 +96,9 @@ public class PhoneStorage {
         }
         Node next=node.getNodes()[phone.charAt(index)-'0'];
         if(index<9) {
-            if (next == null)
-                return;
-            else
+            if (next != null) {
                 find(++index, phone, next);
+            }
         }
         else{
             found=true;
@@ -136,6 +123,29 @@ public class PhoneStorage {
             }
         }
         return false;
+    }
+
+    private void traverse(Node node, String str){
+        if(!hasMore(node, -1))
+            System.out.println(str+node.getValue());
+        for(int i=0;i<10;i++){
+            if(node.getNodes()[i]==null)
+                continue;
+            else
+                traverse(node.getNodes()[i], str+node.getValue());
+        }
+    }
+
+    void printAllPhones(){
+        boolean noPhones=true;
+        for(Node n:nodes){
+            if(n!=null) {
+                traverse(n, "");
+                noPhones=false;
+            }
+        }
+        if(noPhones)
+            System.out.println("There are no phones to show.\n");
     }
 
 }

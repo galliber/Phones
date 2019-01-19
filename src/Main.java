@@ -4,8 +4,8 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args){
         Scanner sc=new Scanner(System.in);
-
         PhoneStorage ps=new PhoneStorage();
+        
         String input;
         String phone;
 
@@ -19,11 +19,15 @@ public class Main {
                         System.out.print("Type in a phone to be added:");
                         phone = sc.nextLine();
                         if (checkPhone(phone)) {
+                            if(ps.findPhone(phone)){
+                                System.out.println("\nPhone already exists.\n");
+                                break;
+                            }
                             ps.addPhone(phone);
-                            System.out.println("Phone added.\n");
+                            System.out.println("\nPhone added.\n");
                             break;
                         } else
-                            System.out.println("Invalid phone");
+                            System.out.println("\nInvalid phone");
                     }
                     break;
 
@@ -34,12 +38,12 @@ public class Main {
                         phone = sc.nextLine();
                         if (checkPhone(phone)) {
                             if(ps.findPhone(phone))
-                                System.out.println("Phone found.\n");
+                                System.out.println("\nPhone found.\n");
                             else
-                                System.out.println("Phone not found.\n");
+                                System.out.println("\nPhone not found.\n");
                             break;
                         } else
-                            System.out.println("Invalid phone");
+                            System.out.println("\nInvalid phone");
                     }
                     break;
                 case "3": {
@@ -48,12 +52,12 @@ public class Main {
                         phone = sc.nextLine();
                         if (checkPhone(phone)) {
                             if (ps.deletePhone(phone))
-                                System.out.println("Phone deleted.\n");
+                                System.out.println("\nPhone deleted.\n");
                             else
-                                System.out.println("No phone found.\n");
+                                System.out.println("\nNo phone found.\n");
                             break;
                         } else
-                            System.out.println("Invalid phone");
+                            System.out.println("\nInvalid phone");
                     }
                     break;
                 }
@@ -66,25 +70,27 @@ public class Main {
                         try {
                             iQuantity = Integer.valueOf(quantity);
                             if (iQuantity > 10000)
-                                System.out.println("Invalid input");
+                                System.out.println("\nInvalid input");
                             else {
                                 addRandomPhones(ps, iQuantity);
                                 break;
                             }
                         } catch (NumberFormatException e) {
-                            System.out.println("Invalid input.");
+                            System.out.println("\nInvalid input.");
                         }
                     }
+                    break;
                 }
                 case "5":{
-                    printPhoneStorage(ps);
+                    ps.printAllPhones();
+                    break;
                 }
 
                 case "0":
                     exit=false;
                     break;
                 default:
-                    System.out.println("Invalid input\n");
+                    System.out.println("\nInvalid input\n");
 
 
             }
@@ -98,7 +104,7 @@ public class Main {
                 "To find a phone, type in:----------- 2\n" +
                 "To delete a phone, type in:--------- 3\n" +
                 "To add random phones, type in:------ 4\n" +
-                "To see the structure, type in:------ 5\n" +
+                "To see all phones, type in:--------- 5\n" +
                 "To exit, type in:------------------- 0\n");
     }
 
@@ -130,15 +136,12 @@ public class Main {
             return number;
         else{
             int repetitions=10-number.length();
-            String zeroes="";
+            StringBuilder zeroes= new StringBuilder();
             for(int i=0;i<repetitions;i++)
-                zeroes+=0;
+                zeroes.append(0);
             return zeroes+number;
         }
     }
 
-    private static void printPhoneStorage(PhoneStorage ps){
-
-    }
 
 }
