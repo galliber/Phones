@@ -5,7 +5,7 @@ public class Main {
     public static void main(String[] args){
         Scanner sc=new Scanner(System.in);
         PhoneStorage ps=new PhoneStorage();
-        
+
         String input;
         String phone;
 
@@ -86,6 +86,11 @@ public class Main {
                     break;
                 }
 
+                case "6":{
+                    ps.printTrees();
+                    break;
+                }
+
                 case "0":
                     exit=false;
                     break;
@@ -100,12 +105,13 @@ public class Main {
 
     private static void printMenu(){
         System.out.println("" +
-                "To add a phone, type in:------------ 1\n" +
-                "To find a phone, type in:----------- 2\n" +
-                "To delete a phone, type in:--------- 3\n" +
-                "To add random phones, type in:------ 4\n" +
-                "To see all phones, type in:--------- 5\n" +
-                "To exit, type in:------------------- 0\n");
+                "To add a phone, type in:-------------- 1\n" +
+                "To find a phone, type in:------------- 2\n" +
+                "To delete a phone, type in:----------- 3\n" +
+                "To add random phones, type in:-------- 4\n" +
+                "To see all phones, type in:----------- 5\n" +
+                "To see the tree structures, type in:-- 6\n" +
+                "To exit, type in:--------------------- 0\n");
     }
 
     private static boolean checkPhone(String phone){

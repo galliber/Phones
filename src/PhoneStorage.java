@@ -1,3 +1,6 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
 class PhoneStorage {
     private class Node{
         private int value;
@@ -91,17 +94,14 @@ class PhoneStorage {
 
     private void find(int index, String phone, Node node){
         if(index>9) {
-            found = true;
+            found=true;
             return;
         }
         Node next=node.getNodes()[phone.charAt(index)-'0'];
-        if(index<9) {
+        if(index<=9) {
             if (next != null) {
                 find(++index, phone, next);
             }
-        }
-        else{
-            found=true;
         }
     }
 
@@ -126,13 +126,14 @@ class PhoneStorage {
     }
 
     private void traverse(Node node, String str){
-        if(!hasMore(node, -1))
-            System.out.println(str+node.getValue());
+        if(!hasMore(node, -1)) {
+            System.out.println(str + node.getValue());
+            return;
+        }
         for(int i=0;i<10;i++){
-            if(node.getNodes()[i]==null)
-                continue;
-            else
+            if (node.getNodes()[i] != null) {
                 traverse(node.getNodes()[i], str+node.getValue());
+            }
         }
     }
 
@@ -148,4 +149,37 @@ class PhoneStorage {
             System.out.println("There are no phones to show.\n");
     }
 
+    void printTrees(){
+        boolean noPhones=true;
+        for(Node n:nodes){
+            if(n!=null) {
+                printTree(n);
+                noPhones=false;
+            }
+        }
+        if(noPhones)
+            System.out.println("There are no phones to show.\n");
+    }
+
+    private void printTree(Node node){
+        Queue<Node> q = new LinkedList<>();
+        q.offer(node);
+        while(true) {
+            int qSize=q.size();
+            if(qSize==0)
+                break;
+            while (qSize>0) {
+                Node no=q.poll();
+                System.out.print(no.getValue()+" ");
+                for (Node n : no.getNodes()) {
+                    if (n != null) {
+                        q.add(n);
+                    }
+                }
+                qSize--;
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
 }
