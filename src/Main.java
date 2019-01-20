@@ -91,6 +91,12 @@ public class Main {
                     break;
                 }
 
+                case "clear":{
+                    ps=new PhoneStorage();
+                    System.out.println("\nAll phones removed\n");
+                    break;
+                }
+
                 case "0":
                     exit=false;
                     break;
@@ -105,13 +111,14 @@ public class Main {
 
     private static void printMenu(){
         System.out.println("" +
-                "To add a phone, type in:-------------- 1\n" +
-                "To find a phone, type in:------------- 2\n" +
-                "To delete a phone, type in:----------- 3\n" +
-                "To add random phones, type in:-------- 4\n" +
-                "To see all phones, type in:----------- 5\n" +
-                "To see the tree structures, type in:-- 6\n" +
-                "To exit, type in:--------------------- 0\n");
+                "To add a phone, type in:------------------- 1\n" +
+                "To find a phone, type in:------------------ 2\n" +
+                "To delete a phone, type in:---------------- 3\n" +
+                "To add random phones, type in:------------- 4\n" +
+                "To see all phones, type in:---------------- 5\n" +
+                "To see the tree structures, type in:------- 6\n\n" +
+                "To wipe out all phone numbers, type in:---- clear\n" +
+                "To exit, type in:-------------------------- 0\n");
     }
 
     private static boolean checkPhone(String phone){
