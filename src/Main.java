@@ -109,6 +109,7 @@ public class Main {
         }
     }
 
+    //Prints the user interface.
     private static void printMenu(){
         System.out.println("" +
                 "To add a phone, type in:------------------- 1\n" +
@@ -121,6 +122,7 @@ public class Main {
                 "To exit, type in:-------------------------- 0\n");
     }
 
+    //Checks if a string is a valid phone(a number between 0 and 9999999999).
     private static boolean checkPhone(String phone){
         if(phone.length()==10){
             try {
@@ -134,6 +136,8 @@ public class Main {
             return false;
     }
 
+    //Generates strings with length of 10 characters, that
+    //are added to a PhoneStorage object with some quantity.
     private static void addRandomPhones(PhoneStorage ps, int quantity){
         Random random=new Random();
         long randomNumber;
@@ -144,6 +148,7 @@ public class Main {
 
     }
 
+    //Adds zeroes in front of a string to make it 10 characters long.
     private static String addZeroesToLongNumber(String number){
         if(number.length()==10)
             return number;

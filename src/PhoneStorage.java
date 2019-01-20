@@ -36,6 +36,7 @@ class PhoneStorage {
     private boolean found;
     private Node[] nodes=new Node[10];
 
+    //Adds a phone number.
     void addPhone(String phone) {
         if(nodes[phone.charAt(0)-'0'] == null){
             Node node=nodes[phone.charAt(0)-'0']=new Node(phone.charAt(0)-'0');
@@ -45,6 +46,7 @@ class PhoneStorage {
             add(1, phone, nodes[phone.charAt(0)-'0']);
     }
 
+    //Finds out if a phone number is already added.
     boolean findPhone(String phone){
         found=false;
         if(nodes[phone.charAt(0)-'0']==null)
@@ -55,6 +57,7 @@ class PhoneStorage {
         return found;
     }
 
+    //Deletes a phone number.
     boolean deletePhone(String phone){
         if(findPhone(phone)){
             Node lastPhoneNode=getLastNodeFromPhone(phone);
@@ -77,6 +80,7 @@ class PhoneStorage {
         return false;
     }
 
+    //Adds a phone number.
     private void add(int index, String phone, Node node){
         if(index >9)
             return;
@@ -92,6 +96,7 @@ class PhoneStorage {
 
     }
 
+    //Searches for a phone number.
     private void find(int index, String phone, Node node){
         if(index>9) {
             found=true;
@@ -105,16 +110,20 @@ class PhoneStorage {
         }
     }
 
+    //Simplified use of getLastNodeFromPhone(int index, String name, Node node).
     private Node getLastNodeFromPhone(String phone){
         return getLastNodeFromPhone(0, phone, nodes[phone.charAt(0)-'0']);
     }
 
+    //Returns the node that contains the last digit of a phone number.
     private Node getLastNodeFromPhone(int index, String phone, Node node){
         if(index==9){
             return node;
         }
         return getLastNodeFromPhone(++index, phone, node.getNodes()[phone.charAt(index)-'0']);
     }
+
+    //Checks if a node has any child other than an excluded one.
     private boolean hasMore(Node node, int exclude){
         for(int i=0;i<node.getNodes().length;i++){
             if(i!=exclude) {
@@ -125,6 +134,7 @@ class PhoneStorage {
         return false;
     }
 
+    //Prints all phones for a starting node.
     private void traverse(Node node, String str){
         if(!hasMore(node, -1)) {
             System.out.println(str + node.getValue());
@@ -137,6 +147,7 @@ class PhoneStorage {
         }
     }
 
+    //Prints all phones for every starting node.
     void printAllPhones(){
         boolean noPhones=true;
         for(Node n:nodes){
@@ -149,6 +160,7 @@ class PhoneStorage {
             System.out.println("There are no phones to show.\n");
     }
 
+    //Prints the trees of all starting nodes, if there is one.
     void printTrees(){
         boolean noPhones=true;
         for(Node n:nodes){
@@ -161,6 +173,7 @@ class PhoneStorage {
             System.out.println("There are no phones to show.\n");
     }
 
+    //Prints a tree by levels.
     private void printTree(Node node){
         Queue<Node> q = new LinkedList<>();
         q.offer(node);
